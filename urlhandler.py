@@ -7,8 +7,8 @@ from datetime import datetime
 class URLHandler():
   def __init__(self, mucbot):
     self.mucbot = mucbot
-    self.salt1 = "bork bork"
-    self.salt2 = "sad pandas are happy"
+    self.salt1 = "happy happy hippo"
+    self.salt2 = "sad pandas are sad"
     self.whitelist = ["1b49f24e1acf03ef8ad1b803593227ca1b94868c29d41a8ab22fbc7b6d94342c"]
     filename = "url.txt"
     self.urlfile = open(filename, "a+")
@@ -44,7 +44,7 @@ class URLHandler():
       if urldata["type"] == "urldata":
         print "Found URL:", url
         tdiff = datetime.now() - datetime.fromtimestamp(int(urldata['data']['timestamp']))
-        if uldata['data']['nick'] == msg['mucnick']:
+        if urldata['data']['nick'] == msg['mucnick']:
           self.mucbot.send_message(mto=msg['from'].bare,
             mbody="%s: Thats what you said (%s) ago" % (msg['mucnick'], tdiff),
               mtype='groupchat')
