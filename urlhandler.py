@@ -44,9 +44,14 @@ class URLHandler():
       if urldata["type"] == "urldata":
         print "Found URL:", url
         tdiff = datetime.now() - datetime.fromtimestamp(int(urldata['data']['timestamp']))
-        self.mucbot.send_message(mto=msg['from'].bare,
-          mbody="%s: Oooooooooold! %s was first (%s)" % (msg['mucnick'], urldata['data']['nick'], tdiff),
-          mtype='groupchat')
+        if uldata['data']['nick'] == msg['mucnick']:
+          self.mucbot.send_message(mto=msg['from'].bare,
+            mbody="%s: Thats what you said (%s) ago" % (msg['mucnick'], tdiff),
+              mtype='groupchat')
+        else:
+            self.mucbot.send_message(mto=msg['from'].bare,
+              mbody="%s: Oooooooooold! %s was first (%s)" % (msg['mucnick'], urldata['data']['nick'], tdiff),
+                mtype='groupchat')
       elif urldata["type"] == "notfound":
         print "Adding URL:", url
         self.add(url, str(msg['mucnick']), str(int(time.time())))
