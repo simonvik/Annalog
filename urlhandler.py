@@ -62,9 +62,10 @@ class URLHandler():
                 tdiff = datetime.now() - datetime.fromtimestamp(urldata[2])
 
                 if urldata[0] == msg['mucnick']:
-                    self.mucbot.send_message(mto=msg['from'].bare,
-                        mbody="%s: Thats what you said (%s) ago" % (msg['mucnick'], tdiff),
-                        mtype='groupchat')
+                    pass  #ignore if the user is the same
+#                    self.mucbot.send_message(mto=msg['from'].bare,
+#                        mbody="%s: Thats what you said (%s) ago" % (msg['mucnick'], tdiff),
+#                        mtype='groupchat')
                 else:
                     self.mucbot.send_message(mto=msg['from'].bare,
                         mbody="%s: Oooooooooold! %s was first (%s)" % (msg['mucnick'], urldata[0], tdiff),

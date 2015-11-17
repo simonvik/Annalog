@@ -22,6 +22,9 @@ import re
 
 import sleekxmpp
 
+
+XMPP_CA_CERT_FILE = None
+
 # Python versions before 3.0 do not use UTF-8 encoding
 # by default. To ensure that Unicode is handled properly
 # throughout SleekXMPP, we will set the default encoding
@@ -213,11 +216,12 @@ if __name__ == '__main__':
     if opts.nick is None:
         opts.nick = raw_input("MUC nickname: ")
     if opts.proxy_host is None:
-        opts.proxy_host = raw_input("Proxy host (press enter to ignore):")
-        if opts.proxy_host != "":
-          opts.proxy_port = raw_input("Proxy port: ")
-          opts.proxy_username = raw_input("Proxy username: ")
-          opts.proxy_password = raw_input("Proxy password: ")
+        pass
+#        opts.proxy_host = raw_input("Proxy host (press enter to ignore):")
+#        if opts.proxy_host != "":
+#          opts.proxy_port = raw_input("Proxy port: ")
+#          opts.proxy_username = raw_input("Proxy username: ")
+#          opts.proxy_password = raw_input("Proxy password: ")
     else:
         if opts.proxy_port is None:
             opts.proxy_port = raw_input("Proxy port: ")
@@ -240,6 +244,7 @@ if __name__ == '__main__':
             'username': opts.proxy_username,
             'password': opts.proxy_password
         }
+    xmpp.use_ipv6 = False
 
     xmpp.register_plugin('xep_0030') # Service Discovery
     xmpp.register_plugin('xep_0045') # Multi-User Chat
