@@ -61,7 +61,7 @@ class URLHandler():
             if urldata:
                 tdiff = datetime.now() - datetime.fromtimestamp(urldata[2])
 
-                if urldata[0] == msg['mucnick']:
+                if urldata[0].lower() == msg['mucnick'].lower():
                     pass  #ignore if the user is the same
 #                    self.mucbot.send_message(mto=msg['from'].bare,
 #                        mbody="%s: Thats what you said (%s) ago" % (msg['mucnick'], tdiff),
