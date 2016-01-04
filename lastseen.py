@@ -32,8 +32,6 @@ class LastSeen():
         return ret
 
     def handle(self, msg):
-        self.lastseen(msg['mucnick'], int(time.time()), True)
-
         if msg['body'][:9] == "!lastseen":
             nick = msg['body'][10:]
             row = self.lastseen(msg['mucnick'], int(time.time()), False)
@@ -47,6 +45,10 @@ class LastSeen():
             self.mucbot.send_message(mto=msg['from'].bare,
                 mbody=body,
                 mtype='groupchat')
+
+        # do the lastseen(...True) as the last step...
+        self.lastseen(msg['mucnick'], int(time.time()), True)
+
 
 class MUCBotMock():
     def send_message(self, mto, mbody, mtype):
