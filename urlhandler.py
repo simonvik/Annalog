@@ -46,7 +46,7 @@ class URLHandler():
                 mbody="URL History:\n%s" % ("\n".join(self.url_history) ),
                     mtype='groupchat')
 
-        if msg['body'][:11] == "URL History" or msg['body'][:1] == "!":
+        if msg['body'][:11] == "URL History" or msg['body'][:1] == "!" or msg['mucnick'] == "Annarchy":
             return
 
         urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', msg['body'])
