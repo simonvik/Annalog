@@ -17,6 +17,7 @@ from time import gmtime, strftime
 from datetime import datetime
 import json
 from urlhandler import URLHandler
+from lastseen import LastSeen
 
 import re
 
@@ -48,6 +49,7 @@ class MUCBot(sleekxmpp.ClientXMPP):
         sleekxmpp.ClientXMPP.__init__(self, jid, password)
 
         self.urlhandler = URLHandler(self)
+        self.lastseen = LastSeen(self)
 
         self.room = room
         self.nick = nick
@@ -144,6 +146,7 @@ class MUCBot(sleekxmpp.ClientXMPP):
         #disabled because simon whines
         #self.log(msg)
         self.urlhandler.handle(msg)
+        self.lastseen.handle(msg)
 
 
 
