@@ -34,7 +34,7 @@ class LastSeen():
     def handle(self, msg):
         if msg['body'][:9] == "!lastseen":
             nick = msg['body'][10:]
-            row = self.lastseen(msg['mucnick'], int(time.time()), False)
+            row = self.lastseen(nick, int(time.time()), False)
             if row:
                 tdiff = datetime.now() - datetime.fromtimestamp(row[1])
                 body = nick + " was last seen " + str(tdiff) + " (total messages: " + str(row[2]) + ")"
