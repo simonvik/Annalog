@@ -8,3 +8,9 @@ CREATE TABLE urls (
 CREATE TABLE whitelist (
 	url	text PRIMARY KEY
 );
+
+CREATE TABLE lastseen (
+	nick	text,
+	time	bigint,
+	count	int DEFAULT 0
+);
