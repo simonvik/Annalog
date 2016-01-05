@@ -16,7 +16,6 @@ class LastSeen():
         c = db.execute('SELECT nick, time, count FROM lastseen WHERE nick = ? LIMIT 1', [nick])
         row = c.fetchone()
         if row:
-            print "ok..", row[0], row[1]#, row[2]
             ret = row
 
         if update:
@@ -31,7 +30,24 @@ class LastSeen():
 
         return ret
 
+    def stats(self):
+        ret = ""
+        db = sqlite3.connect('db.sq3')
+
+        c = db.execute('SELECT nick, count FROM lastseen ORDER BY count')
+        while True:
+            row = c.fetchone()
+            if (row):
+                ret = ret + str(row[0]) + "\t" + str(row[1]) + "\n"
+            else:
+                break
+
+        db.close()
+
+        return ret[:-1] 
+
     def handle(self, msg):
+        print msg.keys()
         if msg['body'][:9] == "!lastseen":
             nick = msg['body'][10:]
             row = self.lastseen(nick, int(time.time()), False)
@@ -42,6 +58,11 @@ class LastSeen():
             else:
                 body = "Never seen " + nick
 
+            self.mucbot.send_message(mto=msg['from'].bare,
+                mbody=body,
+                mtype='groupchat')
+        elif msg['body'][:6] == "!stats":
+            body = self.stats()
             self.mucbot.send_message(mto=msg['from'].bare,
                 mbody=body,
                 mtype='groupchat')
