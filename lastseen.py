@@ -49,7 +49,6 @@ class LastSeen():
         return ret[:-1] 
 
     def handle(self, msg):
-        print msg.keys()
         if msg['body'][:9] == "!lastseen":
             nick = msg['body'][10:]
             row = self.lastseen(nick, int(time.time()), False)
