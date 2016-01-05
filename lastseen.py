@@ -71,7 +71,10 @@ class LastSeen():
                 if s[1] > 0:
                     t.append("%d second%s" % (s[1], "" if s[0] == 1 else "s"))
 
-                body = nick + " was last seen " + ", ".join(t) + " ago"
+                if len(t) == 0:
+                    body = nick + " is here right now!"
+                else:
+                    body = nick + " was last seen " + ", ".join(t) + " ago"
             else:
                 body = "Never seen " + nick
 
