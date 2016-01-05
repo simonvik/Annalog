@@ -38,7 +38,7 @@ class LastSeen():
         while True:
             row = c.fetchone()
             if (row):
-                ret = ret + str(row[0]) + "\t" + str(row[1]) + "\n"
+                ret = ret + '{0:15} {1:>7}'.format(row[0][:1] + "_" + row[0][1:], row[1]) + "\n"
             else:
                 break
 
