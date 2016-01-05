@@ -34,12 +34,12 @@ class LastSeen():
         ret = ""
         db = sqlite3.connect('db.sq3')
 
-        c = db.execute('SELECT nick, count FROM lastseen ORDER BY count DESC')
+        c = db.execute('SELECT nick, count, round(count*100)/(select sum(count) from lastseen) FROM lastseen ORDER BY count DESC')
         i = 1
         while True:
             row = c.fetchone()
             if (row):
-                ret = ret + '{0:3}: {1:15} {2:>7}\n'.format(i, row[0][:1] + "_" + row[0][1:], row[1])
+                ret = ret + '{0:3}: {1:15} {2:>7} {3:>10}%\n'.format(i, row[0][:1] + "_" + row[0][1:], row[1], row[2])
                 i = i + 1
             else:
                 break
