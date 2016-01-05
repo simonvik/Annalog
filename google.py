@@ -1,6 +1,7 @@
 import re
 import time
 import json
+import urllib
 import urllib2
 import collections
 import sys
@@ -10,14 +11,14 @@ class Google():
         self.mucbot = mucbot
 
     def google(self, q):
-        data = json.load(urllib2.urlopen('http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=%s' % q))
+        data = json.load(urllib2.urlopen('http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=%s' % urllib.quote_plus(q)))
         
-        ret = ""
+        ret = []
         for i in range(0, max(3, len(data['responseData']['results']))):
             res = data['responseData']['results'][i]
-            ret = ret + '%s - %s\n' % (res['titleNoFormatting'], res['url']) 
+            ret.append('%s - %s' % (res['titleNoFormatting'], res['url']))
         
-        return ret
+        return '\n'.join(ret)
 
     def handle(self, msg):
         if msg['body'][:7] == "!google":
@@ -38,7 +39,7 @@ class FromMock():
 
 def do_test():
     x = Google(MUCBotMock())
-    msg = {"from" : FromMock("channel@example.com"), "mucnick" : "kallsse", "body" : "!google test"}
+    msg = {"from" : FromMock("channel@example.com"), "mucnick" : "kallsse", "body" : "!google four lights"}
     x.handle(msg)
 
 if __name__ == "__main__":
