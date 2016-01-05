@@ -34,7 +34,7 @@ class LastSeen():
         ret = ""
         db = sqlite3.connect('db.sq3')
 
-        c = db.execute('SELECT nick, sum(count), round(sum(count)*100)/(select sum(count) from lastseen) FROM lastseen GROUP BY lower(nick) ORDER BY count DESC LIMIT 10')
+        c = db.execute('SELECT nick, sum(count), round(sum(count)*100)/(select sum(count) from lastseen) FROM lastseen GROUP BY lower(nick) ORDER BY sum(count) DESC LIMIT 10')
         i = 1
         while True:
             row = c.fetchone()
