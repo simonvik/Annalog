@@ -18,6 +18,7 @@ from datetime import datetime
 import json
 from urlhandler import URLHandler
 from lastseen import LastSeen
+from google import Google
 
 import re
 
@@ -50,6 +51,7 @@ class MUCBot(sleekxmpp.ClientXMPP):
 
         self.urlhandler = URLHandler(self)
         self.lastseen = LastSeen(self)
+        self.google = Google(self)
 
         self.room = room
         self.nick = nick
@@ -147,6 +149,7 @@ class MUCBot(sleekxmpp.ClientXMPP):
         #self.log(msg)
         self.urlhandler.handle(msg)
         self.lastseen.handle(msg)
+        self.google.handle(msg)
 
 
 
