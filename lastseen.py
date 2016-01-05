@@ -59,7 +59,7 @@ class LastSeen():
                 s = divmod(m[1], 60)
 
                 t = []
-                if dt.days > 0:
+                if tdiff.days > 0:
                     t.append("%d day%s" % (tdiff.days, "" if tdiff.days == 1 else "s"))
 
                 if h[0] > 0:
