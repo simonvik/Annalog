@@ -54,8 +54,24 @@ class LastSeen():
             row = self.lastseen(nick, int(time.time()), False)
             if row:
                 tdiff = datetime.now() - datetime.fromtimestamp(row[1])
-                body = nick + " was last seen " + str(tdiff) + " (total messages: " + str(row[2]) + ")"
+                h = divmod(tdiff.seconds, 3600)
+                m = divmod(h[1], 60)
+                s = divmod(m[1], 60)
 
+                t = []
+                if dt.days > 0:
+                    t.append("%d day%s" % (tdiff.days, "" if tdiff.days == 1 else "s"))
+
+                if h[0] > 0:
+                    t.append("%d hour%s" % (h[0], "" if h[0] == 1 else "s"))
+
+                if m[0] > 0:
+                    t.append("%d minute%s" % (m[0], "" if m[0] == 1 else "s"))
+
+                if s[1] > 0:
+                    t.append("%d second%s" % (s[1], "" if s[0] == 1 else "s"))
+
+                body = nick + " was last seen " + ", ".join(t) + " ago"
             else:
                 body = "Never seen " + nick
 
