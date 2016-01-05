@@ -11,19 +11,19 @@ class Google():
         self.mucbot = mucbot
 
     def google(self, q):
-        data = json.load(urllib2.urlopen('http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=%s' % urllib.quote_plus(q)))
+        data = json.load(urllib2.urlopen("http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=%s" % urllib.quote_plus(q)))
         
         ret = []
-        for i in range(0, max(3, len(data['responseData']['results']))):
-            res = data['responseData']['results'][i]
-            ret.append('%s - %s' % (res['titleNoFormatting'], res['url']))
+        for i in range(0, min(3, len(data["responseData"]["results"]))):
+            res = data["responseData"]["results"][i]
+            ret.append("%s - %s" % (res["titleNoFormatting"], res["url"]))
         
-        return '\n'.join(ret)
+        return "\n".join(ret)
 
     def handle(self, msg):
         if msg['body'][:7] == "!google":
             q = msg['body'][8:]
-            body = self.google(q)
+            body = "Results:\n" + self.google(q)
 
             self.mucbot.send_message(mto=msg['from'].bare,
                 mbody=body,
