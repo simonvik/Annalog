@@ -39,7 +39,7 @@ class LastSeen():
         while True:
             row = c.fetchone()
             if (row):
-                ret = ret + str(i) + ": " + '{0:15} {1:>7}'.format(row[0][:1] + "_" + row[0][1:], row[1]) + "\n"
+                ret = ret + '{0:3}: {1:15} {2:>7}'.format(i, row[0][:1] + "_" + row[0][1:], row[1]) + "\n"
                 i = i + 1
             else:
                 break
