@@ -19,6 +19,8 @@ import json
 from urlhandler import URLHandler
 from lastseen import LastSeen
 from google import Google
+from dice import Dice
+from hash import Hash
 
 import re
 
@@ -48,10 +50,8 @@ class MUCBot(sleekxmpp.ClientXMPP):
 
     def __init__(self, jid, password, room, nick):
         sleekxmpp.ClientXMPP.__init__(self, jid, password)
-
-        self.urlhandler = URLHandler(self)
-        self.lastseen = LastSeen(self)
-        self.google = Google(self)
+        
+        self.plugins = [URLHandler(self), LastSeen(self), Google(self), Dice(self), Hash(self)]
 
         self.room = room
         self.nick = nick
@@ -147,10 +147,8 @@ class MUCBot(sleekxmpp.ClientXMPP):
 
         #disabled because simon whines
         #self.log(msg)
-        self.urlhandler.handle(msg)
-        self.lastseen.handle(msg)
-        self.google.handle(msg)
-
+        for p in self.plugins:
+            p.handle(msg)
 
 
     def muc_online(self, presence):
