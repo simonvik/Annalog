@@ -27,7 +27,7 @@ class EightBall():
                 mtype='groupchat')
 
     def help(self):
-        return ["8ball - Ask the all-knowing magic 8 ball"]
+        return ["8ball - ask the all-knowing magic 8 ball"]
 
 class MUCBotMock():
     def send_message(self, mto, mbody, mtype):

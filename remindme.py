@@ -76,7 +76,7 @@ class RemindMe():
                     if cal.parse(reqTime)[1] == 0:
                         body = "For being a dick, the reminder was set for 15 minutes!"
                         reqMsg = "not be a dick anymore"
-                        reqUser = msg['mucuser']
+                        reqUser = msg['mucnick']
                         holdTime = cal.parse("15 minutes", datetime.now(timezone('UTC')))
                     else:
                         holdTime = cal.parse(reqTime, datetime.now(timezone('UTC')))
@@ -87,8 +87,8 @@ class RemindMe():
                     utcTime = utcTime.replace(tzinfo = tz.tzutc())
                     localTime = utcTime.astimezone(tz.tzlocal())
 
-                    diff = datetime.now(tz.tzlocal()) - localTime
-                    if diff.seconds > 0:
+                    nowTime = datetime.now(tz.tzlocal())
+                    if localTime > nowTime:
                         db = sqlite3.connect('db.sq3')
                         db.execute('INSERT INTO reminders (sender, nick, time, msg) VALUES (?, ?, ?, ?)', (msg['from'].bare, reqUser, dbTime, reqMsg) )
                         db.commit()
@@ -96,8 +96,10 @@ class RemindMe():
 
                         if body == "":
                             body = "Ok, reminder set for %s :D" % localTime.strftime('%Y-%m-%d %H:%M:%S')
-                    else:
+                    elif localTime == nowTime:
                         body = "You can probably remember that long, %s..." % msg['mucnick']
+                    else:
+                        body = "Stop living in the past, %s!" % msg['mucnick']
                 except:
                     body = "Time out of range"
 

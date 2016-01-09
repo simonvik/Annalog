@@ -27,7 +27,7 @@ class IsUp():
                 mtype='groupchat')
 
     def help(self):
-        return ["isup - Check if a host is up"]
+        return ["isup - check if a host is up"]
 
 class MUCBotMock():
     def send_message(self, mto, mbody, mtype):
