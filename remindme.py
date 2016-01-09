@@ -97,7 +97,7 @@ class RemindMe():
                         if body == "":
                             body = "Ok, reminder set for %s :D" % localTime.strftime('%Y-%m-%d %H:%M:%S')
                     else:
-                        body = "You can probably rember that long, %s..." % msg['mucnick']
+                        body = "You can probably remember that long, %s..." % msg['mucnick']
                 except:
                     body = "Time out of range"
 
