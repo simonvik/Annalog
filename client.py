@@ -22,6 +22,7 @@ from google import Google
 from dice import Dice
 from hash import Hash
 from eightball import EightBall
+from remindme import RemindMe
 
 import re
 
@@ -58,7 +59,8 @@ class MUCBot(sleekxmpp.ClientXMPP):
             Google(self), 
             Dice(self), 
             Hash(self),
-            EightBall(self)
+            EightBall(self),
+            RemindMe(self)
         ]
 
         self.room = room
