@@ -21,6 +21,7 @@ from lastseen import LastSeen
 from google import Google
 from dice import Dice
 from hash import Hash
+from eightball import EightBall
 
 import re
 
@@ -51,7 +52,14 @@ class MUCBot(sleekxmpp.ClientXMPP):
     def __init__(self, jid, password, room, nick):
         sleekxmpp.ClientXMPP.__init__(self, jid, password)
         
-        self.plugins = [URLHandler(self), LastSeen(self), Google(self), Dice(self), Hash(self)]
+        self.plugins = [
+            URLHandler(self), 
+            LastSeen(self), 
+            Google(self), 
+            Dice(self), 
+            Hash(self),
+            EightBall(self)
+        ]
 
         self.room = room
         self.nick = nick
