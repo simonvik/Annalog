@@ -30,7 +30,7 @@ class Google():
                 mtype='groupchat')
 
     def help(self):
-        return ["google - Return top 3 results for a Google query"]
+        return ["google - return top 3 results for a Google query"]
 
 class MUCBotMock():
     def send_message(self, mto, mbody, mtype):
