@@ -17,7 +17,7 @@ class Dice():
 
     def handle(self, msg):
         if msg['body'][:5] == "!roll":
-            match = re.search("([0-9]?)d([0-9]+)", msg['body'][6:])
+            match = re.search("([0-9]*)d([0-9]+)", msg['body'][6:])
             
             if match:
                 try:
@@ -55,6 +55,9 @@ def do_test():
     x.handle(msg)
     
     msg = {"from" : FromMock("channel@example.com"), "mucnick" : "kallsse", "body" : "!roll 3d2"}
+    x.handle(msg)
+    
+    msg = {"from" : FromMock("channel@example.com"), "mucnick" : "kallsse", "body" : "!roll 30d2"}
     x.handle(msg)
     
     msg = {"from" : FromMock("channel@example.com"), "mucnick" : "kallsse", "body" : "!roll ad10"}
