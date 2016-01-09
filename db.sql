@@ -14,3 +14,10 @@ CREATE TABLE lastseen (
 	time	bigint,
 	count	int DEFAULT 0
 );
+
+CREATE TABLE reminders (
+	sender  text,
+	nick	text,
+	time	bigint,
+	msg     text
+);
