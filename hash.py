@@ -34,11 +34,7 @@ class Hash():
 
     def help(self):
         ret = []
-        ret.append("md5 - return md5 hash")
-        ret.append("sha1 - return sha1 hash")
-        ret.append("sha256 - return sha256 hash")
-        ret.append("sha512 - return sha512 hash")
-        ret.append("crc32 - return crc32 hash")
+        ret.append("md5, sha1, sha256, sha512, crc32 - return misc hash")
         return ret
 
 class MUCBotMock():
