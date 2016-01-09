@@ -38,6 +38,9 @@ class Dice():
                 mbody=body,
                 mtype='groupchat')
 
+    def help(self):
+        return ["roll - roll dice, format NdS (N - how many times, S - how many sides"]
+
 class MUCBotMock():
     def send_message(self, mto, mbody, mtype):
         print "MUCBotMock:", mto, mbody, mtype

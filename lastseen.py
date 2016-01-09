@@ -90,6 +90,11 @@ class LastSeen():
         # do the lastseen(...True) as the last step...
         self.lastseen(msg['mucnick'], int(time.time()), True)
 
+    def help(self):
+        ret = []
+        ret.append("lastseen - check when nick was last seen")
+        ret.append("stats - see top 10 spammers")
+        return ret
 
 class MUCBotMock():
     def send_message(self, mto, mbody, mtype):

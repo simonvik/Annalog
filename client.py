@@ -147,6 +147,18 @@ class MUCBot(sleekxmpp.ClientXMPP):
 
         #disabled because simon whines
         #self.log(msg)
+        if msg['body'][:5] == "!help":
+            body = "\nCommands:\n"
+            cmds = []
+            for p in self.plugins:
+                cmds = cmds + p.help()
+
+            body = body + "\n".join(["    {0}".format(c) for c in sorted(cmds)])
+
+            self.send_message(mto=msg['from'].bare,
+                mbody=body,
+                mtype='groupchat')
+
         for p in self.plugins:
             p.handle(msg)
 
