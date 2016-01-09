@@ -32,6 +32,15 @@ class Hash():
                 mbody=body,
                 mtype='groupchat')
 
+    def help(self):
+        ret = []
+        ret.append("md5 - return md5 hash")
+        ret.append("sha1 - return sha1 hash")
+        ret.append("sha256 - return sha256 hash")
+        ret.append("sha512 - return sha512 hash")
+        ret.append("crc32 - return crc32 hash")
+        return ret
+
 class MUCBotMock():
     def send_message(self, mto, mbody, mtype):
         print "MUCBotMock:", mto, mbody, mtype

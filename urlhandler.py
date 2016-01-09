@@ -71,6 +71,8 @@ class URLHandler():
                         mbody="%s: Oooooooooold! %s was first (%s)" % (msg['mucnick'], urldata[0], tdiff),
                         mtype='groupchat')
 
+    def help(self):
+	return []
 
 # Importer
 def do_import(path):
