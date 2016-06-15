@@ -20,7 +20,7 @@ class LastSeen():
 
         if update:
             if row:
-                # Sqlite does not now about cool stuff like INSERT OR UPDATE
+                # Sqlite does not know about cool stuff like INSERT OR UPDATE
                 db.execute('UPDATE lastseen SET time = ?, count=?  WHERE nick = ?', [time, (row[2] + 1), nick])
             else:
                 db.execute('INSERT INTO lastseen (nick, time, count) VALUES (?, ?, 1)', (nick, time) )
